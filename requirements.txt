@@ -1,0 +1,9 @@
+# Runtime dependencies. Python 3.11+ (developed on 3.14).
+langgraph>=0.2
+pydantic>=2.7
+PyYAML>=6.0
+rich>=13
+langchain-xai>=1.0
+pypdf>=5.0
+python-dotenv>=1.0
+streamlit>=1.50

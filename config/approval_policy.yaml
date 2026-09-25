@@ -1,0 +1,25 @@
+# Approval Policy: edit this file to change how Findings decide an Outcome.
+#
+# review_threshold: Invoices with no blocking Findings and a total above this
+#   amount (USD) are sent to VP Review; at or below it they are Approved.
+# findings: every Finding kind must be listed here, mapped to Rejected or Held.
+#   When an Invoice has several Findings, the most severe Outcome wins
+#   (Rejected over Held). By default only facts the code checked Reject; anything
+#   the AI suspects, inferred or couldn't check is Held for a person.
+
+review_threshold: 10000
+
+findings:
+  shortfall: Rejected            # bills more units than we have in Stock
+  unknown_item: Rejected         # item not in the inventory database
+  invalid_quantity: Rejected     # zero or negative quantity
+  arithmetic_mismatch: Rejected  # line totals, subtotal, tax and total disagree
+  missing_vendor: Rejected       # no one to pay
+  missing_total: Rejected        # no amount to pay
+  fraud_signal: Held             # the AI saw signs the Invoice may not be genuine
+  missing_due_date: Held         # missing or unreadable due date
+  non_usd_currency: Held         # not paid at face value in dollars
+  duplicate: Held                # same number and Vendor as an already Approved Invoice
+  unreadable_document: Held      # no Invoice could be read from the file
+  guessed_field: Held            # the AI Reader had to infer a value
+  ai_unavailable: Held           # the AI couldn't read or screen it (Grok down, no key, no valid answer)
